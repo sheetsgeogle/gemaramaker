@@ -166,7 +166,7 @@ url_patterns = {
         "גיטין": "https://example.com/koren/gittin.pdf",
         "בכורות": "https://example.com/koren/bechorot.pdf",
         "שבועות": "https://example.com/koren/shevuot.pdf",
-        "מנחות": "https://example.com/koren/menachot.pdf",fdf
+        "מנחות": "https://example.com/koren/menachot.pdf",
         "כתובות": "https://example.com/koren/ketubot.pdf",
         "יומא": "https://example.com/koren/yoma.pdf",
         "עירובין": "https://example.com/koren/eruvin.pdf",
