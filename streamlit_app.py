@@ -10,7 +10,7 @@ st.title("Gemara Library")
 # Options for different types
 option = st.selectbox(
     "Select Gemara Type:",
-    ["Artscroll", "Mesivta", "Koren", "Standard"]
+    ["Standard", "Mesivta", "Koren", "Artscroll"]
 )
 
 # Dropdown for Mesechta selection
