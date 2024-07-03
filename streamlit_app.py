@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import requests
 from PyPDF2 import PdfMerger
+from io import BytesIO
 
 # Streamlit app title
 st.title("PDF Merger")
@@ -15,13 +16,6 @@ if st.button("Merge PDFs"):
     # Initialize a PdfMerger object
     merger = PdfMerger()
     
-    # Get the path to the Downloads directory
-    downloads_path = os.path.join(os.path.expanduser("~"), "Downloads")
-    
-    # Create a directory to save individual PDFs temporarily
-    temp_dir = os.path.join(downloads_path, "temp_pdfs")
-    os.makedirs(temp_dir, exist_ok=True)
-    
     # Loop through the range and download each PDF
     for i in range(start, end + 1):
         # Define the URL pattern based on the number of digits in the current page number
@@ -29,22 +23,21 @@ if st.button("Merge PDFs"):
         url = url_pattern.format(i)
         response = requests.get(url)
         if response.status_code == 200:
-            pdf_filename = os.path.join(temp_dir, f"page_{i}.pdf")
-            with open(pdf_filename, 'wb') as pdf_file:
-                pdf_file.write(response.content)
-            merger.append(pdf_filename)
-            st.write(f"Downloaded and added page {i}")
-        else:
-            st.write(f"Failed to download {url}")
+            pdf_bytes = BytesIO(response.content)
+            merger.append(pdf_bytes)
     
-    # Write out the merged PDF to the Downloads folder
-    output_filename = os.path.join(downloads_path, "merged_document.pdf")
-    merger.write(output_filename)
+    # Write the merged PDF to a BytesIO object
+    merged_pdf = BytesIO()
+    merger.write(merged_pdf)
     merger.close()
     
-    # Clean up temporary files
-    for temp_pdf in os.listdir(temp_dir):
-        os.remove(os.path.join(temp_dir, temp_pdf))
-    os.rmdir(temp_dir)
+    # Seek to the beginning of the BytesIO object
+    merged_pdf.seek(0)
     
-    st.success(f"Merged document saved as {output_filename}")
+    # Provide a download button for the merged PDF
+    st.download_button(
+        label="Download Merged PDF",
+        data=merged_pdf,
+        file_name="merged_document.pdf",
+        mime="application/pdf"
+    )
