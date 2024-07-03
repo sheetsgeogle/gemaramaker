@@ -185,8 +185,30 @@ url_patterns = {
 # Generate the URL based on the selected options
 if option in url_patterns and mesechta in url_patterns[option]:
     pdf_url = url_patterns[option][mesechta]
-    # Create a button to open the PDF URL
-    if st.button("Open PDF"):
-        st.write(f'<a href="{pdf_url}" target="_blank">Click here to view the PDF</a>', unsafe_allow_html=True)
+    # Apply CSS for the button
+    st.markdown(
+        f"""
+        <style>
+            .custom-button {{
+                background-color: white; /* White background */
+                color: black; /* Black text color */
+                border: 2px solid red; /* Red outline */
+                border-radius: 12px; /* Rounded corners */
+                padding: 10px 20px; /* Padding around the text */
+                text-align: center; /* Center align text */
+                text-decoration: none; /* No underline */
+                display: inline-block; /* Inline-block display */
+                font-size: 16px; /* Font size */
+                margin: 4px 2px; /* Margin around the button */
+                cursor: pointer; /* Pointer cursor on hover */
+            }}
+            .custom-button:hover {{
+                background-color: #f8f8f8; /* Light grey background on hover */
+            }}
+        </style>
+        <a href="{pdf_url}" target="_blank" class="custom-button">Open PDF</a>
+        """,
+        unsafe_allow_html=True
+    )
 else:
     st.write("The selected Gemara type and Mesechta combination is not available.")
