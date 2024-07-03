@@ -5,7 +5,7 @@ from PyPDF2 import PdfMerger
 from io import BytesIO
 
 # Streamlit app title
-st.title("PDF Merger")
+st.title("Gemara Library")
 
 # Input fields for start and end numbers
 start = st.number_input("Start Number", min_value=1, value=1414)
