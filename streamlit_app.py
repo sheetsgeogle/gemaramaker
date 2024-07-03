@@ -12,9 +12,6 @@ end = st.number_input("End Number", min_value=1, value=1474)
 
 # Button to trigger the merging process
 if st.button("Merge PDFs"):
-    # Define the URL pattern
-    url_pattern = "https://daf-yomi.com/Data/UploadedFiles/DY_Page/{:04d}.pdf"
-    
     # Initialize a PdfMerger object
     merger = PdfMerger()
     
@@ -27,6 +24,8 @@ if st.button("Merge PDFs"):
     
     # Loop through the range and download each PDF
     for i in range(start, end + 1):
+        # Define the URL pattern based on the number of digits in the current page number
+        url_pattern = f"https://daf-yomi.com/Data/UploadedFiles/DY_Page/{{:0{len(str(i))}d}}.pdf"
         url = url_pattern.format(i)
         response = requests.get(url)
         if response.status_code == 200:
