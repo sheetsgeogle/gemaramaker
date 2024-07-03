@@ -186,6 +186,6 @@ url_patterns = {
 if option in url_patterns and mesechta in url_patterns[option]:
     pdf_url = url_patterns[option][mesechta]
     if st.button("View Merged PDF"):
-        st.write(f"[View Merged PDF]({pdf_url})")
+        st.markdown(f'<a href="{pdf_url}" target="_blank">Open PDF</a>', unsafe_allow_html=True)
 else:
     st.write("The selected Gemara type and Mesechta combination is not available.")
