@@ -142,7 +142,7 @@ url_patterns = {
         "נדרים": "https://example.com/mesivta/nedarim.pdf"
     },
     "Koren": {
-        "ברכות": "https://example.com/koren/berachot.pdf",
+        "ברכות": "https://ia601509.us.archive.org/12/items/koren-talmud-bavli-noe-edition-vol.-1-berakhot/Koren%20Talmud%20Bavli%2C%20No%C3%A9%20Edition%20Vol.%201%20-%20Berakhot.pdf",
         "כריתות": "https://example.com/koren/keritot.pdf",
         "הוריות": "https://example.com/koren/horayot.pdf",
         "מגילה": "https://example.com/koren/megillah.pdf",
