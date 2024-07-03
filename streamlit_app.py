@@ -185,9 +185,29 @@ url_patterns = {
 # Generate the URL based on the selected options
 if option in url_patterns and mesechta in url_patterns[option]:
     pdf_url = url_patterns[option][mesechta]
-    # Open the PDF in a new tab
+    # Apply CSS for the button
     st.markdown(
-        f'<a href="{pdf_url}" target="_blank"><button style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">Open PDF</button></a>',
+        f"""
+        <style>
+            .custom-button {{
+                background-color: white; /* White background */
+                color: black; /* Black text color */
+                border: 2px solid red; /* Red outline */
+                border-radius: 12px; /* Rounded corners */
+                padding: 10px 20px; /* Padding around the text */
+                text-align: center; /* Center align text */
+                text-decoration: none; /* No underline */
+                display: inline-block; /* Inline-block display */
+                font-size: 16px; /* Font size */
+                margin: 4px 2px; /* Margin around the button */
+                cursor: pointer; /* Pointer cursor on hover */
+            }}
+            .custom-button:hover {{
+                background-color: #f8f8f8; /* Light grey background on hover */
+            }}
+        </style>
+        <a href="{pdf_url}" target="_blank" class="custom-button">Open PDF</a>
+        """,
         unsafe_allow_html=True
     )
 else:
