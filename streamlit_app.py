@@ -185,13 +185,10 @@ url_patterns = {
 # Generate the URL based on the selected options
 if option in url_patterns and mesechta in url_patterns[option]:
     pdf_url = url_patterns[option][mesechta]
-    if st.button("Open PDF"):
-        # Use JavaScript to open the PDF in a new tab
-        js_code = f"""
-        <script>
-        window.open("{pdf_url}", "_blank");
-        </script>
-        """
-        st.markdown(js_code, unsafe_allow_html=True)
+    # Open the PDF in a new tab
+    st.markdown(
+        f'<a href="{pdf_url}" target="_blank"><button style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">Open PDF</button></a>',
+        unsafe_allow_html=True
+    )
 else:
     st.write("The selected Gemara type and Mesechta combination is not available.")
