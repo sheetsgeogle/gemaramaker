@@ -36,7 +36,7 @@ if st.button("Merge PDFs"):
     
     # Provide a download button for the merged PDF
     st.download_button(
-        label="Download Merged PDF",
+        label="Download ⬇️",
         data=merged_pdf,
         file_name="merged_document.pdf",
         mime="application/pdf"
