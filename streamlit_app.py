@@ -185,6 +185,7 @@ url_patterns = {
 # Generate the URL based on the selected options
 if option in url_patterns and mesechta in url_patterns[option]:
     pdf_url = url_patterns[option][mesechta]
-    st.markdown(f"[View Merged PDF]({pdf_url})")
+    if st.button("View Merged PDF"):
+        st.write(f"[View Merged PDF]({pdf_url})")
 else:
     st.write("The selected Gemara type and Mesechta combination is not available.")
