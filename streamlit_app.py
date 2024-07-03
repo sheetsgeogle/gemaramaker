@@ -16,7 +16,14 @@ option = st.selectbox(
 # Dropdown for Mesechta selection
 mesechta = st.selectbox(
     "Select Mesechta:",
-    ["Berachot", "Shabbat", "Eruvin", "Pesachim", "Yoma", "Sukkah", "Beitzah", "Rosh Hashanah", "Taanit", "Megillah", "Moed Katan", "Chagigah", "Yevamot", "Ketubot", "Nedarim", "Nazir", "Sotah", "Gittin", "Kiddushin", "Baba Kama", "Baba Metsia", "Baba Batra", "Sanhedrin", "Makkot", "Shevuot", "Avodah Zarah", "Horayot", "Zevachim", "Menachot", "Chullin", "Bechorot", "Arachin", "Temurah", "Keritot", "Meilah", "Kinnim", "Midot", "Kinnim", "Tamid", "Midos"]
+    [
+        "ברכות", "כריתות", "הוריות", "מגילה", "סנהדרין", "תענית", "מועד קטן",
+        "סוטה", "ערכין", "מכות", "שבת", "קידושין", "חגיגה", "בבא מציעא",
+        "בבא קמא", "עבודה זרה", "תמורה", "נידה", "יבמות", "ראש השנה",
+        "פסחים", "גיטין", "בכורות", "שבועות", "מנחות", "כתובות", "יומא",
+        "עירובין", "ביצה", "חולין", "סוכה", "זבחים", "תמיד", "בבא בתרא",
+        "נזיר", "מעילה", "נדרים"
+    ]
 )
 
 # Input fields for start and end numbers
