@@ -5,6 +5,24 @@ from datetime import datetime
 # Streamlit app title
 st.title("Gemara Library")
 
+# Dropdowns for Gemara Type and Mesechta
+option = st.selectbox(
+    "Select Gemara Type:",
+    ["Standard", "Artscroll", "Mesivta", "Koren"]
+)
+
+mesechta = st.selectbox(
+    "Select Mesechta:",
+    [
+        "ברכות", "כריתות", "הוריות", "מגילה", "סנהדרין", "תענית", "מועד קטן",
+        "סוטה", "ערכין", "מכות", "שבת", "קידושין", "חגיגה", "בבא מציעא",
+        "בבא קמא", "עבודה זרה", "תמורה", "נידה", "יבמות", "ראש השנה",
+        "פסחים", "גיטין", "בכורות", "שבועות", "מנחות", "כתובות", "יומא",
+        "עירובין", "ביצה", "חולין", "סוכה", "זבחים", "תמיד", "בבא בתרא",
+        "נזיר", "מעילה", "נדרים"
+    ]
+)
+
 # Daf Yomi toggle
 daf_yomi_toggle = stt.st_toggle_switch(
     label='Daf Yomi (On/Off)',
@@ -42,24 +60,6 @@ if daf_yomi_toggle:
         unsafe_allow_html=True
     )
 else:
-    # Dropdowns for Gemara Type and Mesechta
-    option = st.selectbox(
-        "Select Gemara Type:",
-        ["Standard", "Artscroll", "Mesivta", "Koren"]
-    )
-
-    mesechta = st.selectbox(
-        "Select Mesechta:",
-        [
-            "ברכות", "כריתות", "הוריות", "מגילה", "סנהדרין", "תענית", "מועד קטן",
-            "סוטה", "ערכין", "מכות", "שבת", "קידושין", "חגיגה", "בבא מציעא",
-            "בבא קמא", "עבודה זרה", "תמורה", "נידה", "יבמות", "ראש השנה",
-            "פסחים", "גיטין", "בכורות", "שבועות", "מנחות", "כתובות", "יומא",
-            "עירובין", "ביצה", "חולין", "סוכה", "זבחים", "תמיד", "בבא בתרא",
-            "נזיר", "מעילה", "נדרים"
-        ]
-    )
-
     # URL patterns for different Gemara types and Mesechtot
     url_patterns = {
         "Standard": {
