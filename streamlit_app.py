@@ -166,6 +166,7 @@ else:
             "ראש השנה": "https://example.com/mesivta/rosh_hashanah.pdf",
             "פסחים": "https://example.com/mesivta/psachim.pdf",
             "גיטין": "https://example.com/mesivta/gittin.pdf",
+            "קנים": "https://ia902204.us.archive.org/5/items/38_20240704/%D7%92%D7%9E%D7%A8%D7%90%20%D7%9E%D7%AA%D7%99%D7%91%D7%AA%D7%90%2038%20%D7%A7%D7%A0%D7%99%D7%9D.pdf",
             "בכורות": "https://example.com/mesivta/bechorot.pdf",
             "שבועות": "https://example.com/mesivta/shevuot.pdf",
             "מנחות": "https://example.com/mesivta/menachot.pdf",
