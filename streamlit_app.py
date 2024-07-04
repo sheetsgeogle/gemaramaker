@@ -5,7 +5,7 @@ from datetime import datetime
 # Streamlit app title
 st.title("Gemara Library")
 
-# Dropdowns for Gemara Type and Mesechta
+# Dropdown for Gemara Type and Mesechta
 option = st.selectbox(
     "Select Gemara Type:",
     ["Standard", "Artscroll", "Mesivta", "Koren"]
@@ -41,6 +41,9 @@ if daf_yomi_toggle:
 
     # Generate the URL for Daf Yomi
     pdf_url = f"https://daf-yomi.com/Data/UploadedFiles/DY_Page/{page_number}.pdf"
+
+    # Hide Gemara Type and Mesechta selectors
+    st.markdown("<style> .stSelectbox { display: none; } </style>", unsafe_allow_html=True)
 
     # Create a button to open the PDF URL
     st.markdown(
@@ -222,6 +225,9 @@ else:
 
     # Construct the PDF URL based on selected type and mesechta
     pdf_url = url_patterns.get(option, {}).get(mesechta, "https://example.com/404.pdf")
+
+    # Show Gemara Type and Mesechta selectors
+    st.markdown("<style> .stSelectbox { display: block; } </style>", unsafe_allow_html=True)
 
     # Create a button to open the PDF URL
     st.markdown(
