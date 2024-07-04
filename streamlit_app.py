@@ -23,10 +23,10 @@ mesechta = st.selectbox(
     ]
 )
 
-# Daf Yomi toggle
-daf_yomi = st.toggle("Daf Yomi")
+# Daf Yomi toggle (simulated with radio button)
+daf_yomi = st.radio("Daf Yomi:", ("Off", "On"))
 
-if daf_yomi:
+if daf_yomi == "On":
     # Calculate the current day's Daf Yomi page number
     today = datetime.now().date()
     start_date = datetime(2024, 7, 3).date()  # Starting date for Daf Yomi pages
@@ -213,7 +213,33 @@ else:
         }
     }
 
-    if not daf_yomi:
+    if daf_yomi == "On":
+        # Calculate the current day's Daf Yomi page number
+        today = datetime.now().date()
+        start_date = datetime(2024, 7, 3).date()  # Starting date for Daf Yomi pages
+        page_number = (today - start_date).days + 3276  # Calculate page number
+
+        # Generate the URL for Daf Yomi
+        pdf_url = f"https://daf-yomi.com/Data/UploadedFiles/DY_Page/{page_number}.pdf"
+
+        # Create a button to open the PDF URL
+        st.markdown(
+            f"""
+            <a href="{pdf_url}" target="_blank" style="
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 16px;
+                color: black;
+                background-color: white;
+                border: 2px solid #D6D6D9;
+                border-radius: 10px;
+                text-align: center;
+                text-decoration: none;
+            ">Open PDF</a>
+            """,
+            unsafe_allow_html=True
+        )
+    else:
         # Generate the URL based on the selected options
         if option in url_patterns and mesechta in url_patterns[option]:
             pdf_url = url_patterns[option][mesechta]
