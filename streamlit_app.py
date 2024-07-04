@@ -1,38 +1,39 @@
 import streamlit as st
-import streamlit_toggle as stt  # Import the custom toggle switch library
+import streamlit_toggle as stt
 from datetime import datetime
 
 # Streamlit app title
 st.title("Gemara Library")
 
-# Add custom CSS for rounded rectangle border
-st.markdown(
-    """
+# Custom CSS to create a rounded rectangle border around the entire page
+st.markdown("""
     <style>
-    .app-container {
-        border: 2px solid #D6D6D9; /* Border color */
-        border-radius: 20px; /* Rounded corners */
-        padding: 20px; /* Padding inside the border */
-        margin: 20px; /* Margin outside the border */
-    }
-    .stSelectbox, .stButton, .stMarkdown {
-        margin: 10px; /* Space between elements */
-    }
+        .main {
+            padding: 1em;
+            border: 2px solid #D6D6D9;
+            border-radius: 15px;
+            margin: 0 auto;
+            max-width: 1200px;
+            background-color: #f9f9f9;
+        }
+        .stButton>button {
+            border-radius: 10px;
+        }
+        .stSelectbox {
+            border-radius: 10px;
+        }
     </style>
-    """,
-    unsafe_allow_html=True
-)
+""", unsafe_allow_html=True)
 
-# Create a container with the border
+# Container for the app
 with st.container():
-    st.markdown('<div class="app-container">', unsafe_allow_html=True)
-
-    # Dropdown for Gemara Type and Mesechta
+    # Options for different types
     option = st.selectbox(
         "Select Gemara Type:",
         ["Standard", "Artscroll", "Mesivta", "Koren"]
     )
 
+    # Dropdown for Mesechta selection
     mesechta = st.selectbox(
         "Select Mesechta:",
         [
@@ -45,25 +46,22 @@ with st.container():
         ]
     )
 
-    # Daf Yomi toggle
-    daf_yomi_toggle = stt.st_toggle_switch(
+    # Toggle switch for Daf Yomi
+    daf_yomi = stt.st_toggle_switch(
         label='Daf Yomi (On/Off)',
-        default_value=False,  # Default to Off
+        default_value=False,
         label_after=True,
-        inactive_color='#780c21',  # Red when Off
-        active_color='#0c7822',  # Green when On
-        track_color='#0c4c78'  # Blue track color
+        inactive_color='#780c21',
+        active_color='#0c7822',
+        track_color='#0c4c78'
     )
 
-    if daf_yomi_toggle:
-        # Calculate the current day's Daf Yomi page number
-        today = datetime.now().date()
-        start_date = datetime(2024, 7, 3).date()  # Starting date for Daf Yomi pages
-        page_number = (today - start_date).days + 3276  # Calculate page number
-
-        # Generate the URL for Daf Yomi
+    if daf_yomi:
+        # Generate Daf Yomi URL
+        today = datetime.now()
+        page_number = 3276 + (today - datetime(2024, 7, 3)).days
         pdf_url = f"https://daf-yomi.com/Data/UploadedFiles/DY_Page/{page_number}.pdf"
-
+        
         # Hide Gemara Type and Mesechta selectors
         st.markdown("<style> .stSelectbox { display: none; } </style>", unsafe_allow_html=True)
 
@@ -80,7 +78,7 @@ with st.container():
                 border-radius: 10px;
                 text-align: center;
                 text-decoration: none;
-            ">Open Daf Yomi PDF</a>
+            ">Open PDF</a>
             """,
             unsafe_allow_html=True
         )
@@ -245,29 +243,25 @@ with st.container():
             }
         }
 
-        # Construct the PDF URL based on selected type and mesechta
-        pdf_url = url_patterns.get(option, {}).get(mesechta, "https://example.com/404.pdf")
-
-        # Show Gemara Type and Mesechta selectors
-        st.markdown("<style> .stSelectbox { display: block; } </style>", unsafe_allow_html=True)
-
-        # Create a button to open the PDF URL
-        st.markdown(
-            f"""
-            <a href="{pdf_url}" target="_blank" style="
-                display: inline-block;
-                padding: 10px 20px;
-                font-size: 16px;
-                color: black;
-                background-color: white;
-                border: 2px solid #D6D6D9;
-                border-radius: 10px;
-                text-align: center;
-                text-decoration: none;
-            ">Open Gemara PDF</a>
-            """,
-            unsafe_allow_html=True
-        )
-
-    # Close the custom container
-    st.markdown('</div>', unsafe_allow_html=True)
+        # Generate the URL based on the selected options
+        if option in url_patterns and mesechta in url_patterns[option]:
+            pdf_url = url_patterns[option][mesechta]
+            # Create a button to open the PDF URL
+            st.markdown(
+                f"""
+                <a href="{pdf_url}" target="_blank" style="
+                    display: inline-block;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    color: black;
+                    background-color: white;
+                    border: 2px solid #D6D6D9;
+                    border-radius: 10px;
+                    text-align: center;
+                    text-decoration: none;
+                ">Open PDF</a>
+                """,
+                unsafe_allow_html=True
+            )
+        else:
+            st.write("The selected Gemara type and Mesechta combination is not available.")
