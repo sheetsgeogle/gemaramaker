@@ -25,7 +25,7 @@ mesechta = st.selectbox(
 
 # Daf Yomi toggle
 daf_yomi_toggle = stt.st_toggle_switch(
-    label='Daf Yomi (On/Off)',
+    label='Daf Yomi (Off/On)',
     default_value=False,  # Default to Off
     label_after=True,
     inactive_color='#780c21',  # Red when Off
