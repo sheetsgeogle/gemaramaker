@@ -144,7 +144,7 @@ else:
             "נדרים": "https://example.com/artscroll/nedarim.pdf"
         },
         "Mesivta": {
-            "ברכות": "https://example.com/mesivta/berachot.pdf",
+            "ברכות": "https://ia902203.us.archive.org/33/items/1_20240704_20240704_0132/%D7%92%D7%9E%D7%A8%D7%90%20%D7%9E%D7%AA%D7%99%D7%91%D7%AA%D7%90%201%20%D7%91%D7%A8%D7%9B%D7%95%D7%AA.pdf",
             "כריתות": "https://example.com/mesivta/keritot.pdf",
             "הוריות": "https://example.com/mesivta/horayot.pdf",
             "מגילה": "https://example.com/mesivta/megillah.pdf",
@@ -166,7 +166,6 @@ else:
             "ראש השנה": "https://example.com/mesivta/rosh_hashanah.pdf",
             "פסחים": "https://example.com/mesivta/psachim.pdf",
             "גיטין": "https://example.com/mesivta/gittin.pdf",
-            "קנים": "https://ia902204.us.archive.org/5/items/38_20240704/%D7%92%D7%9E%D7%A8%D7%90%20%D7%9E%D7%AA%D7%99%D7%91%D7%AA%D7%90%2038%20%D7%A7%D7%A0%D7%99%D7%9D.pdf",
             "בכורות": "https://example.com/mesivta/bechorot.pdf",
             "שבועות": "https://example.com/mesivta/shevuot.pdf",
             "מנחות": "https://example.com/mesivta/menachot.pdf",
