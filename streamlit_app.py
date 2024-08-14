@@ -6,16 +6,21 @@ import io
 import streamlit_toggle as stt
 
 def download_pdf(url):
-    response = requests.get(url)
-    response.raise_for_status()
-    return io.BytesIO(response.content)
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return io.BytesIO(response.content)
+    except requests.HTTPError as e:
+        st.error(f"Failed to download PDF from {url}. Error: {e}")
+        return None
 
 def combine_pdfs(pdfs):
     pdf_writer = PdfWriter()
     for pdf in pdfs:
-        pdf_reader = PdfReader(pdf)
-        for page_num in range(len(pdf_reader.pages)):
-            pdf_writer.add_page(pdf_reader.pages[page_num])
+        if pdf:
+            pdf_reader = PdfReader(pdf)
+            for page_num in range(len(pdf_reader.pages)):
+                pdf_writer.add_page(pdf_reader.pages[page_num])
     combined_pdf = io.BytesIO()
     pdf_writer.write(combined_pdf)
     combined_pdf.seek(0)
@@ -71,12 +76,13 @@ def main():
         pdfs = [download_pdf(url) for url in pdf_urls]
         combined_pdf = combine_pdfs(pdfs)
 
-        st.download_button(
-            label="Download today's Daf Yomi PDF",
-            data=combined_pdf,
-            file_name=f"combined_{date_of_interest.strftime('%Y-%m-%d')}.pdf",
-            mime="application/pdf"
-        )
+        if combined_pdf:
+            st.download_button(
+                label="Download today's Daf Yomi PDF",
+                data=combined_pdf,
+                file_name=f"combined_{date_of_interest.strftime('%Y-%m-%d')}.pdf",
+                mime="application/pdf"
+            )
     else:
         # URL patterns for different Gemara types and Mesechtot
         url_patterns = {
@@ -169,13 +175,17 @@ def main():
         selected_url = url_patterns[option].get(mesechta, None)
 
         if selected_url:
-            pdf = download_pdf(selected_url)
-            st.download_button(
-                label=f"Download {mesechta} ({option}) PDF",
-                data=pdf,
-                file_name=f"{mesechta}_{option}.pdf",
-                mime="application/pdf"
-            )
+            if "example.com" in selected_url:
+                st.write("We're working on this. Come back soon!")
+            else:
+                pdf = download_pdf(selected_url)
+                if pdf:
+                    st.download_button(
+                        label=f"Download {mesechta} ({option}) PDF",
+                        data=pdf,
+                        file_name=f"{mesechta}_{option}.pdf",
+                        mime="application/pdf"
+                    )
         else:
             st.write("PDF not available for the selected options.")
 
